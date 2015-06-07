@@ -1,9 +1,13 @@
 import React from 'react';
+import Location from './location';
 
 export default class App extends React.Component {
 	render() {
 		return (
-			<h1>App</h1>
+			<div>
+				<h1>Is it recycling day?</h1>
+				<Location />
+			</div>
 		);
 	}
 }
