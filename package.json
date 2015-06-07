@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:js": "browserify index.js -t babelify | uglifyjs --compress --mangle > build.js",
     "watch:js": "watchify index.js -t babelify -t livereactload -t cssify --debug --verbose -o build.js",
-    "reload:html": "browser-sync start --server --files \"index.html\"",
+    "reload:html": "browser-sync start --server --no-ui --files \"index.html\"",
     "reload:js": "npm run watch:js & livereactload monitor build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
     "build": "NODE_ENV=production npm run build:js"
@@ -24,7 +24,9 @@
   "author": "Chris Jaure",
   "license": "ISC",
   "dependencies": {
+    "addressit": "^1.2.1",
     "moment": "^2.10.3",
+    "number-to-words": "^1.1.0",
     "parse-address": "0.0.4",
     "react": "^0.13.3"
   },

@@ -1,5 +1,6 @@
-import {parseLocation} from 'parse-address';
+import addressit from 'addressit';
 import moment from 'moment';
+import {toWordsOrdinal} from 'number-to-words';
 
 const appletonApiVersion = '2.2';
 const appletonApiBaseUrl = `http://${appletonApiVersion}.appletonapi.appspot.com`;
@@ -41,7 +42,19 @@ export default {
 	},
 
 	parseAddress: (formattedAddress) => {
-		return parseLocation(formattedAddress);
+		let parsedAddress = addressit(formattedAddress);
+		let street = parseInt(parsedAddress.street, 10);
+		if (!isNaN(street)) {
+			// need to convert things like '8th' to 'Eigth'
+			parsedAddress.street = toWordsOrdinal(street).replace(/-/g, '');
+		}
+		else {
+			// remove street type
+			parsedAddress.street = parsedAddress.street.split(' ').filter((text, index, arr) => {
+				return (index < arr.length - 1);
+			}).join(' ');
+		}
+		return parsedAddress;
 	},
 
 	getProperties: (address) => {
@@ -78,6 +91,10 @@ export default {
 			prefix = 'next week ';
 		}
 		return prefix + garbageDate.format('dddd');
+	},
+
+	getPropertyAddress: (property) => {
+		return property[7].address;
 	}
 
 };
