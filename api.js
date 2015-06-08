@@ -32,10 +32,9 @@ export default function api (context) {
 
 		getCurrentCoordinates: () => {
 			return new Promise((resolve, reject) => {
-				context.navigator.geolocation.getCurrentPosition(position => {
-
+				context.geolocation.getCurrentPosition(position => {
 					if (!position || !position.coords) {
-						return reject('No position!');
+						return reject(new Error('No position!'));
 					}
 					resolve(position.coords);
 				});
@@ -79,16 +78,16 @@ export default function api (context) {
 				.then(json);
 		},
 
-		isRecyclingDay: (property) => {
+		isRecyclingDay: (property, currentDate) => {
 			let recycleDate = moment(property[1].recycleday, 'MM-DD-YYYY');
-			let now = moment();
+			let now = moment(currentDate);
 			return recycleDate.week() === now.week();
 		},
 
-		getNextGarbageDay: (property) => {
-			let garbageDate = moment().day(property[1].garbageday);
+		getNextGarbageDay: (property, currentDate) => {
+			let garbageDate = moment(currentDate).day(property[1].garbageday);
 			let prefix = 'this week ';
-			if (garbageDate < moment()) {
+			if (garbageDate < moment(currentDate)) {
 				prefix = 'next week ';
 			}
 			return prefix + garbageDate.format('dddd');

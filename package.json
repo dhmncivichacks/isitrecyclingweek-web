@@ -1,14 +1,11 @@
 {
-  "name": "react-boilerplate",
-  "version": "2.0.0",
-  "description": "React ES6 Browserify boilerplate",
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/chrisjaure/react-boilerplate.git"
-  },
+  "name": "recycle",
+  "version": "1.0.0",
+  "description": "Is it recycling?",
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
+    "watch:test": "chokidar '**/*.js' -c 'npm test'",
     "build:js": "browserify index.js -t babelify | uglifyjs --compress --mangle > build.js",
     "watch:js": "watchify index.js -t babelify -t livereactload -t cssify --debug --verbose -o build.js",
     "reload:html": "browser-sync start --server --no-ui --files \"index.html\"",
@@ -16,11 +13,6 @@
     "dev": "npm run reload:js & npm run reload:html",
     "build": "NODE_ENV=production npm run build:js"
   },
-  "keywords": [
-    "boilerplate",
-    "react",
-    "es6"
-  ],
   "author": "Chris Jaure",
   "license": "ISC",
   "dependencies": {
@@ -36,6 +28,7 @@
     "babelify": "^5.0.5",
     "browser-sync": "^2.7.6",
     "browserify": "^8.1.3",
+    "chokidar-cli": "^0.2.1",
     "cssify": "^0.7.0",
     "jasmine-es6": "0.0.3",
     "livereactload": "^0.5.2",

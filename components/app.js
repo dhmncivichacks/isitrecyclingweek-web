@@ -8,7 +8,7 @@ import createApi from '../api';
 
 const api = createApi({
 	fetch: fetch.bind(window),
-	navigator
+	geolocation: navigator.geolocation
 });
 
 export default class App extends React.Component {
