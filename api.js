@@ -18,83 +18,85 @@ function json (response) {
 	return response.json();
 }
 
-export default {
+export default function api (context) {
+	return {
 
-	reverseGeocode: (coordinates) => {
-		let {latitude, longitude} = coordinates;
-		let url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false`;
-		return fetch(url)
-			.then(status)
-			.then(json)
-			.then(data => data.results);
-	},
+		reverseGeocode: (coordinates) => {
+			let {latitude, longitude} = coordinates;
+			let url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false`;
+			return context.fetch(url)
+				.then(status)
+				.then(json)
+				.then(data => data.results);
+		},
 
-	getCurrentCoordinates: () => {
-		return new Promise((resolve, reject) => {
-			navigator.geolocation.getCurrentPosition(position => {
+		getCurrentCoordinates: () => {
+			return new Promise((resolve, reject) => {
+				context.navigator.geolocation.getCurrentPosition(position => {
 
-				if (!position || !position.coords) {
-					return reject('No position!');
-				}
-				resolve(position.coords);
+					if (!position || !position.coords) {
+						return reject('No position!');
+					}
+					resolve(position.coords);
+				});
 			});
-		});
-	},
+		},
 
-	parseAddress: (formattedAddress) => {
-		let parsedAddress = addressit(formattedAddress);
-		let street = parseInt(parsedAddress.street, 10);
-		if (!isNaN(street)) {
-			// need to convert things like '8th' to 'Eigth'
-			parsedAddress.street = toWordsOrdinal(street).replace(/-/g, '');
+		parseAddress: (formattedAddress) => {
+			let parsedAddress = addressit(formattedAddress);
+			let street = parseInt(parsedAddress.street, 10);
+			if (!isNaN(street)) {
+				// need to convert things like '8th' to 'Eigth'
+				parsedAddress.street = toWordsOrdinal(street).replace(/-/g, '');
+			}
+			else {
+				// remove street type
+				parsedAddress.street = parsedAddress.street.split(' ').filter((text, index, arr) => {
+					return (index < arr.length - 1);
+				}).join(' ');
+			}
+			return parsedAddress;
+		},
+
+		getProperties: (address) => {
+			let {number, street} = address;
+			let url = `${appletonApiBaseUrl}/search?h=${number}&s=${street}`;
+			return context.fetch(url)
+				.then(status)
+				.then(json)
+				.then(data => {
+					if (!data.length) {
+						return Promise.reject(new Error('No Appleton address found!'));
+					}
+					return Promise.resolve(data);
+				});
+		},
+
+		getProperty: (id) => {
+			let url = `${appletonApiBaseUrl}/property/${id}`;
+			return context.fetch(url)
+				.then(status)
+				.then(json);
+		},
+
+		isRecyclingDay: (property) => {
+			let recycleDate = moment(property[1].recycleday, 'MM-DD-YYYY');
+			let now = moment();
+			return recycleDate.week() === now.week();
+		},
+
+		getNextGarbageDay: (property) => {
+			let garbageDate = moment().day(property[1].garbageday);
+			let prefix = 'this week ';
+			if (garbageDate < moment()) {
+				prefix = 'next week ';
+			}
+			return prefix + garbageDate.format('dddd');
+		},
+
+		getPropertyAddress: (property) => {
+			return property[7].address;
 		}
-		else {
-			// remove street type
-			parsedAddress.street = parsedAddress.street.split(' ').filter((text, index, arr) => {
-				return (index < arr.length - 1);
-			}).join(' ');
-		}
-		return parsedAddress;
-	},
+	};
 
-	getProperties: (address) => {
-		let {number, street} = address;
-		let url = `${appletonApiBaseUrl}/search?h=${number}&s=${street}`;
-		return fetch(url)
-			.then(status)
-			.then(json)
-			.then(data => {
-				if (!data.length) {
-					return Promise.reject(new Error('No Appleton address found!'));
-				}
-				return Promise.resolve(data);
-			});
-	},
-
-	getProperty: (id) => {
-		let url = `${appletonApiBaseUrl}/property/${id}`;
-		return fetch(url)
-			.then(status)
-			.then(json);
-	},
-
-	isRecyclingDay: (property) => {
-		let recycleDate = moment(property[1].recycleday, 'MM-DD-YYYY');
-		let now = moment();
-		return recycleDate.week() === now.week();
-	},
-
-	getNextGarbageDay: (property) => {
-		let garbageDate = moment().day(property[1].garbageday);
-		let prefix = 'this week ';
-		if (garbageDate < moment()) {
-			prefix = 'next week ';
-		}
-		return prefix + garbageDate.format('dddd');
-	},
-
-	getPropertyAddress: (property) => {
-		return property[7].address;
-	}
-
-};
+}

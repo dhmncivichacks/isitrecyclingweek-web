@@ -4,7 +4,12 @@ import Location from './location';
 import Recycling from './recycling';
 import ManualEntry from './manual-entry';
 
-import api from '../api';
+import createApi from '../api';
+
+const api = createApi({
+	fetch: fetch.bind(window),
+	navigator
+});
 
 export default class App extends React.Component {
 	constructor (...args) {
