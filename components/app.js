@@ -1,10 +1,11 @@
 import React from 'react';
-import Spinner from 'react-spinkit';
 import Location from './location';
 import Recycling from './recycling';
 import ManualEntry from './manual-entry';
 
 import createApi from '../api';
+
+import style from '../style.css';
 
 const api = createApi({
 	fetch: fetch.bind(window),
@@ -73,20 +74,13 @@ export default class App extends React.Component {
 				this.setState({ loading: false });
 			});
 	}
-	renderLoader () {
-		return (
-			<Spinner spinnerName="circle" noFadeIn />
-		);
-	}
 	render () {
-		let loading = (this.state.loading)? this.renderLoader() : null;
 		return (
 			<div>
 				<h1>Is it Recycling?</h1>
 				{ this.state.error }
 				<Recycling {...this.state.recycling} />
 				<div>Your address: { this.state.providedAddress }</div>
-				{ loading }
 				<ManualEntry onLookup={this.handleAddressLookup.bind(this)} />
 				<Location onFetch={this.handleFetchLocation.bind(this)} />
 			</div>

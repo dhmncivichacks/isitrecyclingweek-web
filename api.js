@@ -1,6 +1,4 @@
-import addressit from 'addressit';
 import moment from 'moment';
-import {toWordsOrdinal} from 'number-to-words';
 
 const appletonApiVersion = '3-0';
 const appletonApiBaseUrl = `http://${appletonApiVersion}.appletonapi.appspot.com`;

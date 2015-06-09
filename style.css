@@ -1,0 +1,6 @@
+@import 'node_modules/react-ladda/node_modules/ladda/dist/ladda.min.css';
+
+body {
+	margin: 0;
+	padding: 0;
+}
