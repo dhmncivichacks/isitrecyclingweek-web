@@ -12,7 +12,7 @@
     "reload:js": "npm run watch:js & livereactload monitor build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
     "build": "NODE_ENV=production npm run build:js",
-    "publish:pages": "npm run build && gh-pages --src '+(build.js|index.html)'"
+    "publish:pages": "npm run build && gh-pages --dist './' --src '+(build.js|index.html)'"
   },
   "author": "Chris Jaure",
   "license": "ISC",
