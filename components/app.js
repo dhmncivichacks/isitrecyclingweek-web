@@ -55,8 +55,10 @@ export default class App extends React.Component {
 				this.setState({
 					recycling: {
 						isRecycling: api.isRecyclingWeek(property, garbageDate),
-						garbageDay: garbageDate.format('dddd'),
-						isNextGarbageDayThisWeek: api.isDateInCurrentWeek(garbageDate.toDate())
+						garbageDay: {
+							label: garbageDate.format('dddd'),
+							isThisWeek: api.isDateInCurrentWeek(garbageDate.toDate())
+						}
 					},
 					providedAddress: api.getPropertyAddress(property)
 				});
