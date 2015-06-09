@@ -22,9 +22,7 @@
     "material-ui": "^0.8.0",
     "moment": "^2.10.3",
     "react": "^0.13.3",
-    "react-ladda": "^2.0.4",
-    "react-tap-event-plugin": "^0.1.7",
-    "whatwg-fetch": "^0.9.0"
+    "react-tap-event-plugin": "^0.1.7"
   },
   "devDependencies": {
     "babelify": "^5.0.5",
