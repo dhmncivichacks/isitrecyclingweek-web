@@ -1,5 +1,5 @@
 import React from 'react';
-import Ladda from 'react-ladda';
+import IconButton from './icon-button';
 
 export default class Location extends React.Component {
 	constructor (...args) {
@@ -10,15 +10,13 @@ export default class Location extends React.Component {
 	}
 	handleClick () {
 		this.setState({ loading: true });
-		this.props.onFetch().then(() => {
+		this.props.onFetchLocation().then(() => {
 			this.setState({ loading: false });
 		});
 	}
 	render () {
 		return (
-			<Ladda active={this.state.loading} style="expand-right">
-				<button onClick={this.handleClick.bind(this)}>Use Current Location</button>
-			</Ladda>
+			<IconButton onClick={this.handleClick.bind(this)} label="Use Current Location" primary={true} disabled={this.state.loading} icon="fa-map-marker" />
 		);
 	}
 }

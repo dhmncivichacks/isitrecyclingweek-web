@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jasmine",
     "watch:test": "chokidar '**/*.js' -c 'npm test'",
-    "build:js": "browserify index.js -t browserify-css -t babelify | uglifyjs --compress --mangle > build.js",
-    "watch:js": "watchify index.js -t browserify-css -t babelify -g livereactload --debug --verbose -o build.js",
+    "build:js": "browserify index.js -t browserify-css -t [ babelify --optional es7.objectRestSpread ] | uglifyjs --compress --mangle > build.js",
+    "watch:js": "watchify index.js -t browserify-css -t [ babelify --optional es7.objectRestSpread ] -g livereactload --debug --verbose -o build.js",
     "reload:html": "browser-sync start --server --no-ui --files \"index.html\"",
     "reload:js": "npm run watch:js & livereactload monitor build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
@@ -16,10 +16,13 @@
   "author": "Chris Jaure",
   "license": "ISC",
   "dependencies": {
+    "classnames": "^2.1.2",
     "es6-promise": "^2.2.0",
+    "material-ui": "^0.8.0",
     "moment": "^2.10.3",
     "react": "^0.13.3",
     "react-ladda": "^2.0.4",
+    "react-tap-event-plugin": "^0.1.7",
     "whatwg-fetch": "^0.9.0"
   },
   "devDependencies": {

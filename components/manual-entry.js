@@ -1,5 +1,6 @@
 import React from 'react';
-import Ladda from 'react-ladda';
+import {FlatButton, TextField, FontIcon} from 'material-ui';
+import Location from './location';
 
 export default class ManualEntry extends React.Component {
 	constructor (...args) {
@@ -14,18 +15,25 @@ export default class ManualEntry extends React.Component {
 	}
 	handleSubmit (event) {
 		this.setState({ loading: true });
-		event.preventDefault();
-		this.props.onLookup(this.state.userInput).then(() => {
+		if (event) event.preventDefault();
+		return this.props.onLookup(this.state.userInput).then(() => {
 			this.setState({ loading: false });
+		});
+	}
+	handleFetchLocation () {
+		this.setState({ loading: true });
+		return this.props.onFetchLocation().then(address => {
+			this.setState({ userInput: address });
+			return this.handleSubmit();
 		});
 	}
 	render () {
 		return (
 			<form onSubmit={this.handleSubmit.bind(this)}>
-				Enter address: <input type="text" onChange={this.handleInputChange.bind(this)} />
-				<Ladda active={this.state.loading} style="expand-right">
-					<button type="submit">Lookup</button>
-				</Ladda>
+				<FontIcon className="fa fa-search" style={{ marginRight: 6, verticalAlign: 'text-bottom' }} />
+				<TextField hintText="Enter Address" onChange={this.handleInputChange.bind(this)} value={this.state.userInput} />
+				<FlatButton type="submit" disabled={this.state.loading} label="Search" />
+				<Location onFetchLocation={this.handleFetchLocation.bind(this)} />
 			</form>
 		);
 	}

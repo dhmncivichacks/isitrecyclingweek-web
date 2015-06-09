@@ -1,11 +1,13 @@
 import React from 'react';
-import Location from './location';
 import Recycling from './recycling';
 import ManualEntry from './manual-entry';
-
+import Panel from './panel';
+import mui from 'material-ui';
 import createApi from '../api';
-
 import style from '../style.css';
+
+let {LinearProgress, Paper} = mui;
+let ThemeManager = new mui.Styles.ThemeManager();
 
 const api = createApi({
 	fetch: fetch.bind(window),
@@ -17,7 +19,6 @@ export default class App extends React.Component {
 		super(...args);
 		this.state = {
 			providedAddress: null,
-			address: null,
 			loading: false,
 			error: false,
 			recycling: {}
@@ -25,7 +26,7 @@ export default class App extends React.Component {
 	}
 	handleFetchLocation () {
 		this.setState({ loading: true, error: false, recycling: {} });
-		let promise = api.getCurrentCoordinates()
+		return api.getCurrentCoordinates()
 			.then((coordinates) => api.reverseGeocode(coordinates))
 			.then(geocodeAddress => {
 				let {formatted_address} = geocodeAddress[0];
@@ -33,12 +34,7 @@ export default class App extends React.Component {
 					providedAddress: formatted_address
 				});
 				return formatted_address;
-			})
-			.then(address => {
-				return api.getProperties(address);
 			});
-
-		return this.processProperties(promise);
 	}
 	handleAddressLookup (address) {
 		this.setState({ loading: true, error: false, recycling: {} });
@@ -74,16 +70,33 @@ export default class App extends React.Component {
 				this.setState({ loading: false });
 			});
 	}
+	getChildContext() { 
+		return {
+			muiTheme: ThemeManager.getCurrentTheme()
+		};
+	}
 	render () {
 		return (
 			<div>
-				<h1>Is it Recycling?</h1>
-				{ this.state.error }
-				<Recycling {...this.state.recycling} />
-				<div>Your address: { this.state.providedAddress }</div>
-				<ManualEntry onLookup={this.handleAddressLookup.bind(this)} />
-				<Location onFetch={this.handleFetchLocation.bind(this)} />
+				<div style={{ minHeight: 5 }}>
+					{ this.state.loading?
+					<LinearProgress mode="indeterminate" /> : null }
+				</div>
+				<section className="container">
+					<h1 style={{ fontWeight: 300, minHeight: '4em' }}>
+						<Recycling {...this.state.recycling} />
+						<p>
+							<strong style={{ color: mui.Styles.Colors.red600 }}>{ this.state.error }</strong>
+						</p>
+					</h1>
+					<Panel>
+						<ManualEntry onLookup={this.handleAddressLookup.bind(this)} onFetchLocation={this.handleFetchLocation.bind(this)} />
+					</Panel>
+				</section>
 			</div>
 		);
 	}
 }
+App.childContextTypes = {
+	muiTheme: React.PropTypes.object
+};
