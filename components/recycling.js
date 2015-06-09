@@ -3,17 +3,16 @@ import api from '../api';
 
 export default class Recycling extends React.Component {
 	render () {
-		if (!this.props.garbageDate) {
+		let {garbageDay} = this.props;
+		if (!garbageDay) {
 			return null;
 		}
-		let {garbageDate} = this.props;
-		let dayLabel = garbageDate.format('dddd');
 		let weekLabel = 'this week';
 		if (!this.props.isNextGarbageDayThisWeek) {
 			weekLabel = 'next week';
 		}
 		return (
-			<div>Is it recycling { weekLabel } { dayLabel }? { this.props.isRecycling? 'yes': 'no' }</div>
+			<div>Is it recycling { weekLabel } { garbageDay }? { this.props.isRecycling? 'yes': 'no' }</div>
 		);
 	}
 }

@@ -74,12 +74,12 @@ describe('api', () => {
 
 	describe('getProperties', () => {
 		let callApi = () => {
-			return api.getProperties({ street: 'street', number: 'number' });
+			return api.getProperties('Number Street');
 		};
 		it('should hit appleton api endpoint', () => {
 			fetchSpy.and.returnValue(Promise.resolve());
 			callApi();
-			expect(fetchSpy).toHaveBeenCalledWith('http://2.2.appletonapi.appspot.com/search?h=number&s=street');
+			expect(fetchSpy).toHaveBeenCalledWith('http://3-0.appletonapi.appspot.com/search?q=Number%20Street');
 		});
 		it('should reject if no results', () => {
 			let jsonSpy = jasmine.createSpy('json').and.returnValue(Promise.resolve([]));
@@ -105,7 +105,7 @@ describe('api', () => {
 		it('should hit appleton api endpoint', () => {
 			fetchSpy.and.returnValue(Promise.resolve());
 			callApi();
-			expect(fetchSpy).toHaveBeenCalledWith('http://2.2.appletonapi.appspot.com/property/id');
+			expect(fetchSpy).toHaveBeenCalledWith('http://3-0.appletonapi.appspot.com/property/id');
 		});
 		verifyFetchResponse(callApi);
 	});

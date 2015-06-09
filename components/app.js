@@ -31,7 +31,7 @@ export default class App extends React.Component {
 				this.setState({
 					providedAddress: formatted_address
 				});
-				return api.parseAddress(formatted_address);
+				return formatted_address;
 			})
 			.then(address => {
 				return api.getProperties(address);
@@ -41,8 +41,7 @@ export default class App extends React.Component {
 	}
 	handleAddressLookup (address) {
 		this.setState({ loading: true, error: false, recycling: {} });
-		let parsedAddress = api.parseAddress(address);
-		let promise = api.getProperties(parsedAddress);
+		let promise = api.getProperties(address);
 		return this.processProperties(promise);
 	}
 	processProperties (promise) {
@@ -56,7 +55,7 @@ export default class App extends React.Component {
 				this.setState({
 					recycling: {
 						isRecycling: api.isRecyclingWeek(property, garbageDate),
-						garbageDate: garbageDate,
+						garbageDay: garbageDate.format('dddd'),
 						isNextGarbageDayThisWeek: api.isDateInCurrentWeek(garbageDate.toDate())
 					},
 					providedAddress: api.getPropertyAddress(property)

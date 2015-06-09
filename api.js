@@ -2,7 +2,7 @@ import addressit from 'addressit';
 import moment from 'moment';
 import {toWordsOrdinal} from 'number-to-words';
 
-const appletonApiVersion = '2.2';
+const appletonApiVersion = '3-0';
 const appletonApiBaseUrl = `http://${appletonApiVersion}.appletonapi.appspot.com`;
 
 function status (response) {
@@ -41,25 +41,8 @@ export default function api (context) {
 			});
 		},
 
-		parseAddress: (formattedAddress) => {
-			let parsedAddress = addressit(formattedAddress);
-			let street = parseInt(parsedAddress.street, 10);
-			if (!isNaN(street)) {
-				// need to convert things like '8th' to 'Eigth'
-				parsedAddress.street = toWordsOrdinal(street).replace(/-/g, '');
-			}
-			else {
-				// remove street type
-				parsedAddress.street = parsedAddress.street.split(' ').filter((text, index, arr) => {
-					return (index < arr.length - 1);
-				}).join(' ');
-			}
-			return parsedAddress;
-		},
-
 		getProperties: (address) => {
-			let {number, street} = address;
-			let url = `${appletonApiBaseUrl}/search?h=${number}&s=${street}`;
+			let url = `${appletonApiBaseUrl}/search?q=${encodeURIComponent(address)}`;
 			return context.fetch(url)
 				.then(status)
 				.then(json)
