@@ -118,7 +118,46 @@ describe('api', () => {
 			}];
 		});
 		it('should return true if recyling week is current week', () => {
-			expect(api.isRecyclingDay(property, new Date(2000, 0, 24))).toBe(true);
+			expect(api.isRecyclingWeek(property, new Date(2000, 0, 24))).toBe(true);
+			expect(api.isRecyclingWeek(property, new Date(2000, 0, 25))).toBe(true);
+			expect(api.isRecyclingWeek(property, new Date(2000, 0, 26))).toBe(true);
+		});
+		it('should return false if not recycling week', () => {
+			expect(api.isRecyclingWeek(property, new Date(2000, 0, 22))).toBe(false);
+			expect(api.isRecyclingWeek(property, new Date(2000, 0, 30))).toBe(false);
+		});
+	});
+
+	describe('getNextGarbageDate', () => {
+		let property;
+		beforeEach(() => {
+			property = ['', {
+				garbageday: 'Tuesday'
+			}];
+		});
+		it('should return current week day if garbage day has not passed', () => {
+			expect(api.getNextGarbageDate(property, new Date(2000, 0, 24)).date()).toBe(25);
+		});
+		it('should return next week day if garbage day has passed', () => {
+			expect(api.getNextGarbageDate(property, new Date(2000, 0, 26)).date()).toBe(1);
+		});
+	});
+
+	describe('isDateInCurrentWeek', () => {
+		it('should return true if date is in current week', () => {
+			expect(api.isDateInCurrentWeek(new Date(2000, 0, 25), new Date(2000, 0, 24))).toBe(true);
+		});
+		it('should return false if date is not in current week', () => {
+			expect(api.isDateInCurrentWeek(new Date(2000, 0, 30), new Date(2000, 0, 24))).toBe(false);
+		});
+	});
+
+	describe('getPropertyAddress', () => {
+		it('should extract property address', () => {
+			let property = ['','','','','','','',{
+				address: 'address'
+			}];
+			expect(api.getPropertyAddress(property)).toEqual('address');
 		});
 	});
 

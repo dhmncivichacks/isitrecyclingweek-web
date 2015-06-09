@@ -78,19 +78,21 @@ export default function api (context) {
 				.then(json);
 		},
 
-		isRecyclingDay: (property, currentDate) => {
+		isRecyclingWeek: (property, currentDate) => {
 			let recycleDate = moment(property[1].recycleday, 'MM-DD-YYYY');
-			let now = moment(currentDate);
-			return recycleDate.week() === now.week();
+			return recycleDate.week() === moment(currentDate).week();
 		},
 
-		getNextGarbageDay: (property, currentDate) => {
-			let garbageDate = moment(currentDate).day(property[1].garbageday);
-			let prefix = 'this week ';
-			if (garbageDate < moment(currentDate)) {
-				prefix = 'next week ';
+		getNextGarbageDate: (property, currentDate) => {
+			let date = moment(currentDate).day(property[1].garbageday);
+			if (date < moment(currentDate)) {
+				date.add(1, 'w');
 			}
-			return prefix + garbageDate.format('dddd');
+			return date;
+		},
+
+		isDateInCurrentWeek: (date, currentDate) => {
+			return (moment(date).week() === moment(currentDate).week());
 		},
 
 		getPropertyAddress: (property) => {

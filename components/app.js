@@ -19,13 +19,11 @@ export default class App extends React.Component {
 			address: null,
 			loading: false,
 			error: false,
-			userInput: null,
-			isRecycling: null,
-			nextGarbageDay: null
+			recycling: {}
 		};
 	}
 	handleFetchLocation () {
-		this.setState({ loading: true, error: false });
+		this.setState({ loading: true, error: false, recycling: {} });
 		let promise = api.getCurrentCoordinates()
 			.then((coordinates) => api.reverseGeocode(coordinates))
 			.then(geocodeAddress => {
@@ -42,7 +40,7 @@ export default class App extends React.Component {
 		return this.processProperties(promise);
 	}
 	handleAddressLookup (address) {
-		this.setState({ loading: true, error: false });
+		this.setState({ loading: true, error: false, recycling: {} });
 		let parsedAddress = api.parseAddress(address);
 		let promise = api.getProperties(parsedAddress);
 		return this.processProperties(promise);
@@ -54,9 +52,13 @@ export default class App extends React.Component {
 				return api.getProperty(id);
 			})
 			.then(property => {
+				let garbageDate = api.getNextGarbageDate(property);
 				this.setState({
-					isRecycling: api.isRecyclingDay(property),
-					nextGarbageDay: api.getNextGarbageDay(property),
+					recycling: {
+						isRecycling: api.isRecyclingWeek(property, garbageDate),
+						garbageDate: garbageDate,
+						isNextGarbageDayThisWeek: api.isDateInCurrentWeek(garbageDate.toDate())
+					},
 					providedAddress: api.getPropertyAddress(property)
 				});
 			})
@@ -81,7 +83,7 @@ export default class App extends React.Component {
 			<div>
 				<h1>Is it Recycling?</h1>
 				{ this.state.error }
-				<Recycling garbageDay={this.state.nextGarbageDay} isRecycling={this.state.isRecycling} />
+				<Recycling {...this.state.recycling} />
 				<div>Your address: { this.state.providedAddress }</div>
 				{ loading }
 				<ManualEntry onLookup={this.handleAddressLookup.bind(this)} />
