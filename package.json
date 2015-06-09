@@ -7,7 +7,7 @@
     "test": "jasmine",
     "watch:test": "chokidar '**/*.js' -c 'npm test'",
     "build:js": "browserify index.js -t browserify-css -t babelify | uglifyjs --compress --mangle > build.js",
-    "watch:js": "watchify index.js -t browserify-css -t babelify -t livereactload --debug --verbose -o build.js",
+    "watch:js": "watchify index.js -t browserify-css -t babelify -g livereactload --debug --verbose -o build.js",
     "reload:html": "browser-sync start --server --no-ui --files \"index.html\"",
     "reload:js": "npm run watch:js & livereactload monitor build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
