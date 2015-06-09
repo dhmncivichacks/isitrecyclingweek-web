@@ -1,7 +1,7 @@
 import React from 'react';
 import Recycling from '../components/recycling.js';
 
-describe('Recycling component', () => {
+xdescribe('Recycling component', () => {
 	let expectedMarkup = function(week, day, answer) {
 		return `<div>Is it recycling ${week} ${day}? ${answer}</div>`;
 	};
