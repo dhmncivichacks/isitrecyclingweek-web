@@ -12,7 +12,9 @@
     "reload:js": "npm run watch:js & livereactload monitor build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
     "build": "NODE_ENV=production npm run build:js",
-    "publish:pages": "npm run build && gh-pages --dist './' --src '+(build.js|index.html)'"
+    "publish:pages": "npm run build && gh-pages --dist './' --src '+(build.js|index.html)'",
+    "lint": "eslint api.js index.js components || true",
+    "watch:lint": "chokidar '**/*.js' -c 'npm run lint'"
   },
   "author": "Chris Jaure",
   "license": "ISC",
@@ -25,11 +27,14 @@
     "react-tap-event-plugin": "^0.1.7"
   },
   "devDependencies": {
+    "babel-eslint": "^3.1.15",
     "babelify": "^5.0.5",
     "browser-sync": "^2.7.6",
     "browserify": "^8.1.3",
     "browserify-css": "^0.6.1",
     "chokidar-cli": "^0.2.1",
+    "eslint": "^0.22.1",
+    "eslint-plugin-react": "^2.5.0",
     "gh-pages": "^0.3.0",
     "jasmine-es6": "0.0.3",
     "livereactload": "^0.5.2",

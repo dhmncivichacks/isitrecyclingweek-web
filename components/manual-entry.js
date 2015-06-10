@@ -15,7 +15,7 @@ export default class ManualEntry extends React.Component {
 	}
 	handleSubmit (event) {
 		this.setState({ loading: true });
-		if (event) event.preventDefault();
+		if (event) { event.preventDefault(); }
 		return this.props.onLookup(this.state.userInput).then(() => {
 			this.setState({ loading: false });
 		});

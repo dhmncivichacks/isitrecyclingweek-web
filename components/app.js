@@ -4,9 +4,9 @@ import ManualEntry from './manual-entry';
 import Panel from './panel';
 import mui from 'material-ui';
 import createApi from '../api';
-import style from '../style.css';
+import style from '../style.css'; // eslint-disable-line
 
-let {LinearProgress, Paper} = mui;
+let {LinearProgress} = mui;
 let ThemeManager = new mui.Styles.ThemeManager();
 
 const api = createApi({
@@ -29,11 +29,11 @@ export default class App extends React.Component {
 		return api.getCurrentCoordinates()
 			.then((coordinates) => api.reverseGeocode(coordinates))
 			.then(geocodeAddress => {
-				let {formatted_address} = geocodeAddress[0];
+				let address = geocodeAddress[0].formatted_address;
 				this.setState({
-					providedAddress: formatted_address
+					providedAddress: address
 				});
-				return formatted_address;
+				return address;
 			});
 	}
 	handleAddressLookup (address) {
@@ -64,13 +64,13 @@ export default class App extends React.Component {
 				this.setState({
 					error: err.message
 				});
-				console.info(err);
+				console.info(err); // eslint-disable-line
 			})
 			.then(() => {
 				this.setState({ loading: false });
 			});
 	}
-	getChildContext() { 
+	getChildContext() {
 		return {
 			muiTheme: ThemeManager.getCurrentTheme()
 		};
@@ -79,7 +79,7 @@ export default class App extends React.Component {
 		return (
 			<div>
 				<div style={{ minHeight: 5 }}>
-					{ this.state.loading?
+					{ this.state.loading ?
 					<LinearProgress mode="indeterminate" /> : null }
 				</div>
 				<section className="container">

@@ -4,7 +4,7 @@ const appletonApiVersion = '3-0';
 const appletonApiBaseUrl = `http://${appletonApiVersion}.appletonapi.appspot.com`;
 
 function status (response) {
-	if (response.status >= 200 && response.status < 300) {  
+	if (response.status >= 200 && response.status < 300) {
 		return Promise.resolve(response);
 	}
 	else {
