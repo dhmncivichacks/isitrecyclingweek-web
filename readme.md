@@ -22,4 +22,6 @@ Usage
 
 `npm run watch:test` to execute tests on change.
 
-`npm run publish:pages` to publish latest changes to gh-pages.
+`npm run lint --silent` to run linter. 
+
+`npm run publish:pages --silent` to publish latest changes to gh-pages.

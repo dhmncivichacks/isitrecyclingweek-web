@@ -12,8 +12,8 @@
     "reload:js": "npm run watch:js & livereactload monitor src/build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
     "build": "NODE_ENV=production npm run build:js",
-    "publish:pages": "npm run build && gh-pages --dist src --src '+(build.js|index.html)'",
-    "lint": "eslint src spec || true",
+    "publish:pages": "npm run lint --silent && npm run test --silent && npm run build --silent && gh-pages --dist src --src '+(build.js|index.html)'",
+    "lint": "eslint src spec --ignore-pattern src/build.js",
     "watch:lint": "chokidar 'src/**/*.js' 'spec/*.js' -c 'npm run lint'"
   },
   "author": "Chris Jaure",
