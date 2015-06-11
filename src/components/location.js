@@ -16,7 +16,7 @@ export default class Location extends React.Component {
 	}
 	render () {
 		return (
-			<IconButton onClick={this.handleClick.bind(this)} label="Use Current Location" primary={true} disabled={this.state.loading} icon="fa-map-marker" />
+			<IconButton onClick={this.handleClick.bind(this)} label="Use Current Location" secondary={true} disabled={this.state.loading} icon="fa-map-marker" />
 		);
 	}
 }

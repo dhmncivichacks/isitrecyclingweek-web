@@ -32,7 +32,7 @@ export default class ManualEntry extends React.Component {
 			<form onSubmit={this.handleSubmit.bind(this)}>
 				<FontIcon className="fa fa-search" style={{ marginRight: 6, verticalAlign: 'text-bottom' }} />
 				<TextField hintText="Enter Address" onChange={this.handleInputChange.bind(this)} value={this.state.userInput} />
-				<FlatButton type="submit" disabled={this.state.loading} label="Search" />
+				<FlatButton primary={true} type="submit" disabled={this.state.loading} label="Search" style={{ margin: '0 5px' }} />
 				<Location onFetchLocation={this.handleFetchLocation.bind(this)} />
 			</form>
 		);
