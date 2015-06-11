@@ -5,23 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
-    "watch:test": "chokidar '**/*.js' -c 'npm test'",
-    "build:js": "browserify index.js -t browserify-css -t [ babelify --optional es7.objectRestSpread ] | uglifyjs --compress --mangle > build.js",
-    "watch:js": "watchify index.js -t browserify-css -t [ babelify --optional es7.objectRestSpread ] -g livereactload --debug --verbose -o build.js",
-    "reload:html": "browser-sync start --server --no-ui --files \"index.html\"",
-    "reload:js": "npm run watch:js & livereactload monitor build.js & wait",
+    "watch:test": "chokidar 'src/**/*.js' -c 'npm test'",
+    "build:js": "browserify src/index.js -t browserify-css -t [ babelify --optional es7.objectRestSpread ] | uglifyjs --compress --mangle > src/build.js",
+    "watch:js": "watchify src/index.js -t browserify-css -t [ babelify --optional es7.objectRestSpread ] -g livereactload --debug --verbose -o src/build.js",
+    "reload:html": "browser-sync start --server src --no-ui --files 'src/index.html'",
+    "reload:js": "npm run watch:js & livereactload monitor src/build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
     "build": "NODE_ENV=production npm run build:js",
-    "publish:pages": "npm run build && gh-pages --dist './' --src '+(build.js|index.html)'",
-    "lint": "eslint api.js index.js components || true",
-    "watch:lint": "chokidar '**/*.js' -c 'npm run lint'"
+    "publish:pages": "npm run build && gh-pages --dist './' --src 'src/+(build.js|index.html)'",
+    "lint": "eslint src spec || true",
+    "watch:lint": "chokidar 'src/**/*.js' 'spec/*.js' -c 'npm run lint'"
   },
   "author": "Chris Jaure",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.1.2",
     "es6-promise": "^2.2.0",
-    "material-ui": "^0.8.0",
+    "material-ui": "^0.9.0",
     "moment": "^2.10.3",
     "react": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7"
@@ -36,7 +36,7 @@
     "eslint": "^0.22.1",
     "eslint-plugin-react": "^2.5.0",
     "gh-pages": "^0.3.0",
-    "jasmine-es6": "0.0.3",
+    "jasmine-es6": "0.0.7",
     "livereactload": "^0.5.2",
     "uglify-js": "^2.4.23",
     "watchify": "^2.6.2"

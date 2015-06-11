@@ -1,5 +1,6 @@
+/*eslint-env jasmine */
 import React from 'react';
-import Recycling from '../components/recycling.js';
+import Recycling from '../src/components/recycling.js';
 
 xdescribe('Recycling component', () => {
 	let expectedMarkup = function(week, day, answer) {

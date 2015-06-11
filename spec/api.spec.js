@@ -1,4 +1,5 @@
-import createApi from '../api';
+/*eslint-env jasmine */
+import createApi from '../src/api';
 
 describe('api', () => {
 
@@ -16,7 +17,7 @@ describe('api', () => {
 		it('should parse json response', () => {
 			let jsonSpy = jasmine.createSpy('json').and.returnValue(Promise.resolve({}));
 			fetchSpy.and.returnValue(Promise.resolve({ status: 200, json: jsonSpy }));
-			callApi().then((res) => {
+			callApi().then(() => {
 				expect(jsonSpy).toHaveBeenCalled();
 			});
 		});
@@ -154,7 +155,7 @@ describe('api', () => {
 
 	describe('getPropertyAddress', () => {
 		it('should extract property address', () => {
-			let property = ['','','','','','','',{
+			let property = ['', '', '', '', '', '', '', {
 				address: 'address'
 			}];
 			expect(api.getPropertyAddress(property)).toEqual('address');
