@@ -4,6 +4,7 @@ import ManualEntry from './manual-entry';
 import Panel from './panel';
 import mui from 'material-ui';
 import createApi from '../api';
+import log from '../log';
 import style from '../style.css'; // eslint-disable-line
 
 let {LinearProgress} = mui;
@@ -38,13 +39,10 @@ export default class App extends React.Component {
 	}
 	handleAddressLookup (address) {
 		this.setState({ loading: true, error: false, recycling: {} });
-		let promise = api.getProperties(address);
-		return this.processProperties(promise);
-	}
-	processProperties (promise) {
-		return promise
+		return api.getProperties(address)
 			.then(properties => {
 				let [id] = properties[0];
+				log(`${log.house}\n\nYour property id is: ${id}`);
 				return api.getProperty(id);
 			})
 			.then(property => {
@@ -64,7 +62,7 @@ export default class App extends React.Component {
 				this.setState({
 					error: err.message
 				});
-				console.info(err); // eslint-disable-line
+				log(err);
 			})
 			.then(() => {
 				this.setState({ loading: false });

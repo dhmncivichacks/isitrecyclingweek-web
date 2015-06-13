@@ -21,7 +21,6 @@ export default class ManualEntry extends React.Component {
 		});
 	}
 	handleFetchLocation () {
-		this.setState({ loading: true });
 		return this.props.onFetchLocation().then(address => {
 			this.setState({ userInput: address });
 			return this.handleSubmit();
