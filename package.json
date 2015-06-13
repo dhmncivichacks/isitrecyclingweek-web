@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jasmine",
     "watch:test": "chokidar 'src/**/*.js' -c 'npm test'",
-    "build:js": "browserify src/index.js -t browserify-css -t [ babelify --optional es7.objectRestSpread ] | uglifyjs --compress --mangle > src/build.js",
-    "watch:js": "watchify src/index.js -t browserify-css -t [ babelify --optional es7.objectRestSpread ] -g livereactload --debug --verbose -o src/build.js",
+    "build:js": "browserify src/index.js -t browserify-css -t babelify | uglifyjs --compress --mangle > src/build.js",
+    "watch:js": "watchify src/index.js -t browserify-css -t babelify  -g livereactload --debug --verbose -o src/build.js",
     "reload:html": "browser-sync start --server src --no-ui --files 'src/index.html'",
     "reload:js": "npm run watch:js & livereactload monitor src/build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^3.1.15",
-    "babelify": "^5.0.5",
+    "babelify": "^6.1.2",
     "browser-sync": "^2.7.6",
     "browserify": "^8.1.3",
     "browserify-css": "^0.6.1",
