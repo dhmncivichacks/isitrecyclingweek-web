@@ -2,6 +2,7 @@ import React from 'react';
 import Recycling from './recycling';
 import ManualEntry from './manual-entry';
 import Panel from './panel';
+import About from './about';
 import mui from 'material-ui';
 import createApi from '../api';
 import log from '../log';
@@ -91,6 +92,7 @@ export default class App extends React.Component {
 						<ManualEntry onLookup={this.handleAddressLookup.bind(this)} onFetchLocation={this.handleFetchLocation.bind(this)} />
 					</Panel>
 				</section>
+				<About />
 			</div>
 		);
 	}
