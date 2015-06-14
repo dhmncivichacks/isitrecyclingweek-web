@@ -1,38 +1,49 @@
 /*eslint-env jasmine */
-import React from 'react';
+import React from 'react/addons';
 import Recycling from '../src/components/recycling.js';
+import {createElement} from './utils';
 
-xdescribe('Recycling component', () => {
-	let expectedMarkup = function(week, day, answer) {
-		return `<div>Is it recycling ${week} ${day}? ${answer}</div>`;
-	};
-	let createElement = function(props) {
-		return React.createElement(Recycling, props);
-	};
-	it('should indicate garbage day', () => {
-		let el = createElement({
-			garbageDay: {
-				label: 'Thursday'
-			}
-		});
-		expect(React.renderToStaticMarkup(el)).toEqual(expectedMarkup('next week', 'Thursday', 'no'));
+describe('Recycling component', () => {
+	it('should show initial state', () => {
+		let el = createElement(Recycling);
+		expect(React.renderToStaticMarkup(el)).toMatch('Is it Recycling</span>?');
 	});
-	it('should indicate if next garbage day is this week', () => {
-		let el = createElement({
+	it('should show recycle date this week', () => {
+		let el = createElement(Recycling, {
 			garbageDay: {
 				label: 'Thursday',
 				isThisWeek: true
 			}
 		});
-		expect(React.renderToStaticMarkup(el)).toEqual(expectedMarkup('this week', 'Thursday', 'no'));
+		expect(React.renderToStaticMarkup(el)).toMatch('Thursday this week');
 	});
-	it('should indicate if recycling', () => {
-		let el = createElement({
+	it('should show recycle date next week', () => {
+		let el = createElement(Recycling, {
 			garbageDay: {
-				label: 'Thursday'
+				label: 'Thursday',
+				isThisWeek: false
+			}
+		});
+		expect(React.renderToStaticMarkup(el)).toMatch('Thursday next week');
+	});
+	it('should show is recycling message', () => {
+		let el = createElement(Recycling, {
+			garbageDay: {
+				label: 'Thursday',
+				isThisWeek: false
 			},
 			isRecycling: true
 		});
-		expect(React.renderToStaticMarkup(el)).toEqual(expectedMarkup('next week', 'Thursday', 'yes'));
+		expect(React.renderToStaticMarkup(el)).toMatch('Yes! Take out the recycling!');
+	});
+	it('should show is not recycling message', () => {
+		let el = createElement(Recycling, {
+			garbageDay: {
+				label: 'Thursday',
+				isThisWeek: false
+			},
+			isRecycling: false
+		});
+		expect(React.renderToStaticMarkup(el)).toMatch('No, you can relax');
 	});
 });

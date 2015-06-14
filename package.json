@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
-    "watch:test": "chokidar 'src/**/*.js' -c 'npm test'",
+    "watch:test": "chokidar --initial 'src/**/*.js' 'spec/*.js' -c 'npm test'",
     "build:js": "browserify src/index.js -t browserify-css -t babelify | uglifyjs --compress --mangle > src/build.js",
     "watch:js": "watchify src/index.js -t browserify-css -t babelify  -g livereactload --debug --verbose -o src/build.js",
     "reload:html": "browser-sync start --server src --no-ui --files 'src/index.html'",
@@ -14,7 +14,7 @@
     "build": "NODE_ENV=production npm run build:js",
     "publish:pages": "npm run lint --silent && npm run test --silent && npm run build --silent && gh-pages --dist src --src '+(build.js|index.html)'",
     "lint": "eslint src spec --ignore-pattern src/build.js",
-    "watch:lint": "chokidar 'src/**/*.js' 'spec/*.js' -c 'npm run lint'"
+    "watch:lint": "chokidar --initial 'src/**/*.js' 'spec/*.js' -c 'npm run lint --silent'"
   },
   "author": "Chris Jaure",
   "license": "ISC",

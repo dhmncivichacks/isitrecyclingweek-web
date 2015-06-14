@@ -4,7 +4,6 @@ import cx from 'classnames';
 
 export default class Recycling extends React.Component {
 	renderAnswer (text, color, icon) {
-
 		return (
 			<span style={{ color }}>
 				{ icon ?
