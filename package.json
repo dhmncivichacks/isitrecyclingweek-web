@@ -4,6 +4,7 @@
   "description": "Is it recycling?",
   "main": "index.js",
   "scripts": {
+    "pretest": "eslint src spec --ignore-pattern src/build.js",
     "test": "jasmine",
     "watch:test": "chokidar --initial 'src/**/*.js' 'spec/*.js' -c 'npm test'",
     "build:js": "browserify src/index.js -t browserify-css -t babelify | uglifyjs --compress --mangle > src/build.js",
@@ -11,10 +12,10 @@
     "reload:html": "browser-sync start --server src --no-ui --files 'src/index.html'",
     "reload:js": "npm run watch:js & livereactload monitor src/build.js & wait",
     "dev": "npm run reload:js & npm run reload:html",
+    "prebuild": "npm run test --silent",
     "build": "NODE_ENV=production npm run build:js",
-    "publish:pages": "npm run lint --silent && npm run test --silent && npm run build --silent && gh-pages --dist src --src '+(build.js|index.html)'",
-    "lint": "eslint src spec --ignore-pattern src/build.js",
-    "watch:lint": "chokidar --initial 'src/**/*.js' 'spec/*.js' -c 'npm run lint --silent'"
+    "prepublish:pages": "npm run build",
+    "publish:pages": "gh-pages --dist src --src '+(build.js|index.html)'"
   },
   "author": "Chris Jaure",
   "license": "ISC",
