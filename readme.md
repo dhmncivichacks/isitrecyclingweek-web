@@ -1,6 +1,8 @@
 Is it Recycling?
 ================
 
+![](https://travis-ci.org/dhmncivichacks/isitrecycling.svg?branch=master)
+
 [Check](http://dhmncivichacks.github.io/isitrecycling/) if it's recycling week at your Appleton address. This is a web app version of this [Android app](https://github.com/dhmncivichacks/isitrecyclingweek) by [@mikeputnam](https://github.com/mikeputnam) that makes use of the [AppletonAPI](https://github.com/dhmncivichacks/appletonapi).
 
 Development
