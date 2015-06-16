@@ -20,10 +20,8 @@ Usage
 
 `npm run build` to build production quality js.
 
-`npm test` to execute tests.
+`npm test` to execute linter and tests.
 
 `npm run watch:test` to execute tests on change.
-
-`npm run lint --silent` to run linter. 
 
 `npm run publish:pages --silent` to publish latest changes to gh-pages.
