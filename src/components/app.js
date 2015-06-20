@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from './loader';
 import Recycling from './recycling';
 import ManualEntry from './manual-entry';
 import Panel from './panel';
@@ -7,7 +8,6 @@ import mui from 'material-ui';
 import createApi from '../api';
 import log from '../log';
 
-let {LinearProgress} = mui;
 let ThemeManager = new mui.Styles.ThemeManager();
 
 const api = createApi({
@@ -15,7 +15,11 @@ const api = createApi({
 	geolocation: navigator.geolocation
 });
 
-export default class App extends React.Component {
+class App extends React.Component {
+	static childContextTypes = {
+		muiTheme: React.PropTypes.object
+	}
+
 	constructor (...args) {
 		super(...args);
 		this.state = {
@@ -76,10 +80,7 @@ export default class App extends React.Component {
 	render () {
 		return (
 			<div>
-				<div style={{ minHeight: 5 }}>
-					{ this.state.loading ?
-					<LinearProgress mode="indeterminate" /> : null }
-				</div>
+				<Loader loading={this.state.loading} />
 				<section style={{ maxWidth: '40em', margin: '0 auto', padding: '1em', textAlign: 'center' }}>
 					<h1 style={{ fontWeight: 300, minHeight: '4em' }}>
 						<Recycling {...this.state.recycling} />
@@ -96,6 +97,5 @@ export default class App extends React.Component {
 		);
 	}
 }
-App.childContextTypes = {
-	muiTheme: React.PropTypes.object
-};
+
+export default App;
