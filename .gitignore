@@ -1,3 +1,4 @@
 /node_modules
-src/build.js
-src/.build.js
+/dist
+/dev
+*.log
