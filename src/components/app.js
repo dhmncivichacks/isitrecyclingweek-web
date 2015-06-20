@@ -6,7 +6,6 @@ import About from './about';
 import mui from 'material-ui';
 import createApi from '../api';
 import log from '../log';
-import style from '../style.css'; // eslint-disable-line
 
 let {LinearProgress} = mui;
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -81,7 +80,7 @@ export default class App extends React.Component {
 					{ this.state.loading ?
 					<LinearProgress mode="indeterminate" /> : null }
 				</div>
-				<section className="container">
+				<section style={{ maxWidth: '40em', margin: '0 auto', padding: '1em', textAlign: 'center' }}>
 					<h1 style={{ fontWeight: 300, minHeight: '4em' }}>
 						<Recycling {...this.state.recycling} />
 						<p>
