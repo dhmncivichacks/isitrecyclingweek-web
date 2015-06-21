@@ -1,8 +1,11 @@
 import React from 'react';
 import Loader from './loader';
+import Warning from './warning';
 import Recycling from './recycling';
 import ManualEntry from './manual-entry';
+import Header from './header';
 import Panel from './panel';
+import Section from './section';
 import About from './about';
 import mui from 'material-ui';
 import createApi from '../api';
@@ -25,7 +28,7 @@ class App extends React.Component {
 		this.state = {
 			providedAddress: null,
 			loading: false,
-			error: false,
+			error: null,
 			recycling: {}
 		};
 	}
@@ -81,17 +84,15 @@ class App extends React.Component {
 		return (
 			<div>
 				<Loader loading={this.state.loading} />
-				<section style={{ maxWidth: '40em', margin: '0 auto', padding: '1em', textAlign: 'center' }}>
-					<h1 style={{ fontWeight: 300, minHeight: '4em' }}>
+				<Section>
+					<Header>
 						<Recycling {...this.state.recycling} />
-						<p>
-							<strong style={{ color: mui.Styles.Colors.red600 }}>{ this.state.error }</strong>
-						</p>
-					</h1>
+						<Warning error={this.state.error} />
+					</Header>
 					<Panel>
 						<ManualEntry onLookup={this.handleAddressLookup.bind(this)} onFetchLocation={this.handleFetchLocation.bind(this)} />
 					</Panel>
-				</section>
+				</Section>
 				<About />
 			</div>
 		);

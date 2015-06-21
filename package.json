@@ -45,7 +45,7 @@
     "eslint-plugin-react": "^2.5.0",
     "gh-pages": "^0.3.0",
     "jasmine-es6": "0.0.7",
-    "livereactload": "^0.5.2",
+    "livereactload": "^0.6.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "rimraf": "^2.4.0",
