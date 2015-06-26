@@ -1,5 +1,6 @@
 import React from 'react';
-import {FlatButton, FontIcon} from 'material-ui';
+import FlatButton from 'material-ui/lib/flat-button';
+import FontIcon from 'material-ui/lib/font-icon';
 import cx from 'classnames';
 
 export default class IconButton extends React.Component {

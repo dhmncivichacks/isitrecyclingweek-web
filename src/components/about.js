@@ -1,5 +1,7 @@
 import React from 'react';
-import {Dialog, FontIcon, Styles} from 'material-ui';
+import Dialog from 'material-ui/lib/dialog';
+import FontIcon from 'material-ui/lib/font-icon';
+import Styles from 'material-ui/lib/styles';
 
 export default class About extends React.Component {
 

@@ -3,12 +3,13 @@ import Recycling from './recycling';
 import ManualEntry from './manual-entry';
 import Panel from './panel';
 import About from './about';
-import mui from 'material-ui';
 import createApi from '../api';
 import log from '../log';
 
-let {LinearProgress} = mui;
-let ThemeManager = new mui.Styles.ThemeManager();
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import LinearProgress from 'material-ui/lib/linear-progress';
+import Colors from 'material-ui/lib/styles/colors';
+let themeManager = new ThemeManager();
 
 const api = createApi({
 	fetch: fetch.bind(window),
@@ -70,7 +71,7 @@ export default class App extends React.Component {
 	}
 	getChildContext() {
 		return {
-			muiTheme: ThemeManager.getCurrentTheme()
+			muiTheme: themeManager.getCurrentTheme()
 		};
 	}
 	render () {
@@ -84,7 +85,7 @@ export default class App extends React.Component {
 					<h1 style={{ fontWeight: 300, minHeight: '4em' }}>
 						<Recycling {...this.state.recycling} />
 						<p>
-							<strong style={{ color: mui.Styles.Colors.red600 }}>{ this.state.error }</strong>
+							<strong style={{ color: Colors.red600 }}>{ this.state.error }</strong>
 						</p>
 					</h1>
 					<Panel>

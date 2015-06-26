@@ -1,5 +1,7 @@
 import React from 'react';
-import {FlatButton, TextField, FontIcon} from 'material-ui';
+import FlatButton from 'material-ui/lib/flat-button';
+import TextField from 'material-ui/lib/text-field';
+import FontIcon from 'material-ui/lib/font-icon';
 import Location from './location';
 
 export default class ManualEntry extends React.Component {

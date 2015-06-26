@@ -1,5 +1,5 @@
 import React from 'react';
-import {Paper} from 'material-ui';
+import Paper from 'material-ui/lib/paper';
 
 export default class Panel extends React.Component {
 	render () {

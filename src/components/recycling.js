@@ -1,6 +1,7 @@
 import React from 'react';
-import {Styles, FontIcon} from 'material-ui';
 import cx from 'classnames';
+import Styles from 'material-ui/lib/styles';
+import FontIcon from 'material-ui/lib/font-icon';
 
 export default class Recycling extends React.Component {
 	renderAnswer (text, color, icon) {
