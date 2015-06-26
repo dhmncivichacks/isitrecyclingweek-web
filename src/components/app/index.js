@@ -1,14 +1,16 @@
 import React from 'react';
-import Recycling from './recycling';
-import ManualEntry from './manual-entry';
-import Panel from './panel';
-import About from './about';
-import createApi from '../api';
-import log from '../log';
+import Loader from '../loader';
+import Warning from '../warning';
+import Recycling from '../recycling';
+import ManualEntry from '../manual-entry';
+import Header from '../header';
+import Panel from '../panel';
+import Section from '../section';
+import About from '../about';
+import createApi from '../../api';
+import log from '../../log';
 
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import LinearProgress from 'material-ui/lib/linear-progress';
-import Colors from 'material-ui/lib/styles/colors';
 let themeManager = new ThemeManager();
 
 const api = createApi({
@@ -16,13 +18,17 @@ const api = createApi({
 	geolocation: navigator.geolocation
 });
 
-export default class App extends React.Component {
+class App extends React.Component {
+	static childContextTypes = {
+		muiTheme: React.PropTypes.object
+	}
+
 	constructor (...args) {
 		super(...args);
 		this.state = {
 			providedAddress: null,
 			loading: false,
-			error: false,
+			error: null,
 			recycling: {}
 		};
 	}
@@ -77,26 +83,20 @@ export default class App extends React.Component {
 	render () {
 		return (
 			<div>
-				<div style={{ minHeight: 5 }}>
-					{ this.state.loading ?
-					<LinearProgress mode="indeterminate" /> : null }
-				</div>
-				<section style={{ maxWidth: '40em', margin: '0 auto', padding: '1em', textAlign: 'center' }}>
-					<h1 style={{ fontWeight: 300, minHeight: '4em' }}>
+				<Loader loading={this.state.loading} />
+				<Section>
+					<Header>
 						<Recycling {...this.state.recycling} />
-						<p>
-							<strong style={{ color: Colors.red600 }}>{ this.state.error }</strong>
-						</p>
-					</h1>
+						<Warning error={this.state.error} />
+					</Header>
 					<Panel>
 						<ManualEntry onLookup={this.handleAddressLookup.bind(this)} onFetchLocation={this.handleFetchLocation.bind(this)} />
 					</Panel>
-				</section>
+				</Section>
 				<About />
 			</div>
 		);
 	}
 }
-App.childContextTypes = {
-	muiTheme: React.PropTypes.object
-};
+
+export default App;

@@ -1,6 +1,8 @@
 import React from 'react/addons';
 import mui from 'material-ui';
+import proxyquire from 'proxyquire';
 let ThemeManager = new mui.Styles.ThemeManager();
+let proxyquireStrict = proxyquire.noCallThru();
 
 export default {
 	createElement: function(element, props) {
@@ -19,5 +21,10 @@ export default {
 			}
 		});
 		return React.createElement(wrapper);
+	},
+	mockModuleStyles: function (module) {
+		return proxyquireStrict(module, {
+			'./style.css': {}
+		});
 	}
 };

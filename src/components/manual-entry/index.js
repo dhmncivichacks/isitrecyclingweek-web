@@ -1,8 +1,10 @@
 import React from 'react';
+import cx from 'classnames';
 import FlatButton from 'material-ui/lib/flat-button';
 import TextField from 'material-ui/lib/text-field';
 import FontIcon from 'material-ui/lib/font-icon';
-import Location from './location';
+import Location from '../location';
+import classes from './style.css';
 
 export default class ManualEntry extends React.Component {
 	constructor (...args) {
@@ -31,9 +33,9 @@ export default class ManualEntry extends React.Component {
 	render () {
 		return (
 			<form onSubmit={this.handleSubmit.bind(this)}>
-				<FontIcon className="fa fa-search" style={{ marginRight: 6, verticalAlign: 'text-bottom' }} />
+				<FontIcon className={ cx('fa', 'fa-search', classes.searchIcon) } />
 				<TextField hintText="Enter Address" onChange={this.handleInputChange.bind(this)} value={this.state.userInput} />
-				<FlatButton primary={true} type="submit" disabled={this.state.loading} label="Search" style={{ margin: '0 5px' }} />
+				<FlatButton primary={true} type="submit" disabled={this.state.loading} label="Search" className={classes.submitButton} />
 				<Location onFetchLocation={this.handleFetchLocation.bind(this)} />
 			</form>
 		);

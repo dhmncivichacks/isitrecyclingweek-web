@@ -2,6 +2,7 @@ import React from 'react';
 import Dialog from 'material-ui/lib/dialog';
 import FontIcon from 'material-ui/lib/font-icon';
 import Styles from 'material-ui/lib/styles';
+import classes from './style.css';
 
 export default class About extends React.Component {
 
@@ -18,7 +19,7 @@ export default class About extends React.Component {
 	render() {
 		return (
 			<div>
-				<a href="" onClick={this.show.bind(this)} style={{ position: 'absolute', bottom: 5, right: 5, color: Styles.Colors.grey800 }}>
+				<a href="" onClick={this.show.bind(this)} className={ classes.aboutLink } style={{ color: Styles.Colors.grey800 }}>
 					<FontIcon className="fa fa-question-circle" />
 				</a>
 				<Dialog

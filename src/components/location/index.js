@@ -1,5 +1,5 @@
 import React from 'react';
-import IconButton from './icon-button';
+import IconButton from '../icon-button';
 
 export default class Location extends React.Component {
 	constructor (...args) {

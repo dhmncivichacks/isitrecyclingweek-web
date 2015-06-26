@@ -1,7 +1,7 @@
 /*eslint-env jasmine */
 import React from 'react/addons';
-import Recycling from '../src/components/recycling.js';
-import {createElement} from './utils';
+import {createElement, mockModuleStyles} from './utils';
+let Recycling = mockModuleStyles('../src/components/recycling');
 
 describe('Recycling component', () => {
 	it('should show initial state', () => {
