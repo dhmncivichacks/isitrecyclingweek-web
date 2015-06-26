@@ -12,7 +12,7 @@
     "reload:js": "npm run watch:js & livereactload monitor dev/build.js & wait",
     "build:html": "ncp src/index.html dist/index.html",
     "watch:html": "chokidar --initial 'src/*.html' -c 'ncp src/index.html dev/index.html'",
-    "reload:html": "npm run watch:html & browser-sync start --server dev --no-ui --files 'dev/index.html'",
+    "reload:html": "npm run watch:html & browser-sync start --server dev --no-ui --files 'index.html'",
     "predev": "rimraf dev && mkdirp dev",
     "dev": "npm run reload:js & npm run reload:html",
     "prebuild": "npm run test --silent && rimraf dist && mkdirp dist",
