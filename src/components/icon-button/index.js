@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import FlatButton from 'material-ui/lib/flat-button';
 import FontIcon from 'material-ui/lib/font-icon';
 import cx from 'classnames';
 import classes from './style.css';
 
 export default class IconButton extends React.Component {
+	static propTypes = {
+		icon: PropTypes.string
+	}
 	render () {
 		let {icon, className, ...props} = this.props;
 		return (

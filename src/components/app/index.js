@@ -33,7 +33,7 @@ class App extends React.Component {
 		};
 	}
 	handleFetchLocation () {
-		this.setState({ loading: true, error: false, recycling: {} });
+		this.setState({ loading: true, error: null, recycling: {} });
 		return api.getCurrentCoordinates()
 			.then((coordinates) => api.reverseGeocode(coordinates))
 			.then(geocodeAddress => {
@@ -45,7 +45,7 @@ class App extends React.Component {
 			});
 	}
 	handleAddressLookup (address) {
-		this.setState({ loading: true, error: false, recycling: {} });
+		this.setState({ loading: true, error: null, recycling: {} });
 		return api.getProperties(address)
 			.then(properties => {
 				let [id] = properties[0];

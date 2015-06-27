@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import FlatButton from 'material-ui/lib/flat-button';
 import TextField from 'material-ui/lib/text-field';
@@ -7,6 +7,10 @@ import Location from '../location';
 import classes from './style.css';
 
 export default class ManualEntry extends React.Component {
+	static propTypes = {
+		onLookup: PropTypes.func,
+		onFetchLocation: PropTypes.func
+	}
 	constructor (...args) {
 		super(...args);
 		this.state = {

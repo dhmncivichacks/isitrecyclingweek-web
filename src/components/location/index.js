@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import IconButton from '../icon-button';
 
 export default class Location extends React.Component {
+	static propTypes = {
+		onFetchLocation: PropTypes.func
+	}
 	constructor (...args) {
 		super(...args);
 		this.state = {

@@ -23,7 +23,6 @@ export default class About extends React.Component {
 					<FontIcon className="fa fa-question-circle" />
 				</a>
 				<Dialog
-					open={this.props.visible}
 					ref="dialog"
 					title="About"
 					actions={[{ text: 'Close', onClick: this.hide.bind(this) }]}

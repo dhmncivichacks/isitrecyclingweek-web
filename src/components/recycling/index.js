@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import Styles from 'material-ui/lib/styles';
 import FontIcon from 'material-ui/lib/font-icon';
 import classes from './style.css';
 
 export default class Recycling extends React.Component {
+	static propTypes = {
+		garbageDay: PropTypes.shape({
+			isThisWeek: PropTypes.bool,
+			label: PropTypes.string
+		}),
+		isRecycling: PropTypes.bool
+	}
 	renderAnswer (text, color, icon) {
 		return (
 			<span style={{ color }}>
