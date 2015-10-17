@@ -44,7 +44,7 @@ export default function api (context) {
 				.then(json)
 				.then(data => {
 					if (!data.length) {
-						return Promise.reject('No API found! Address not supported.');
+						return Promise.reject(new Error('No API found! Address not supported.'));
 					}
 					return data[0].implementationApiUrl;
 				});
