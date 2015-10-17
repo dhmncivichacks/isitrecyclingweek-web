@@ -1,17 +1,3 @@
-._style__searchIcon {
-    margin-right: 6px;
-    vertical-align: text-bottom;
-}
-
-._style__submitButton {
-    margin: 0 5px;
-}
-
-._style__header {
-    font-weight: 300;
-    min-height: 4em;
-}
-
 ._style__loader {
     min-height: 5px;
 }
@@ -24,6 +10,20 @@
 
 ._style__headerIcon {
     margin-right: 0.5em;
+}
+
+._style__searchIcon {
+    margin-right: 6px;
+    vertical-align: text-bottom;
+}
+
+._style__submitButton {
+    margin: 0 5px;
+}
+
+._style__header {
+    font-weight: 300;
+    min-height: 4em;
 }
 
 ._style__panel {
