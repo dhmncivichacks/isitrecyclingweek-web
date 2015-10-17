@@ -46,23 +46,18 @@ class App extends React.Component {
 	}
 	handleAddressLookup (address) {
 		this.setState({ loading: true, error: null, recycling: {} });
-		return api.getProperties(address)
-			.then(properties => {
-				let [id] = properties[0];
-				log(`${log.house}\n\nYour property id is: ${id}`);
-				return api.getProperty(id);
-			})
-			.then(property => {
-				let garbageDate = api.getNextGarbageDate(property);
+		return api.getEndpoint(address)
+			.then(api.getRecyclePickup.bind(api, address))
+			.then(pickup => {
+				let garbageDate = api.getNextGarbageDate(pickup);
 				this.setState({
 					recycling: {
-						isRecycling: api.isRecyclingWeek(property, garbageDate),
+						isRecycling: api.isRecyclingWeek(pickup, garbageDate),
 						garbageDay: {
 							label: garbageDate.format('dddd'),
 							isThisWeek: api.isDateInCurrentWeek(garbageDate.toDate())
 						}
-					},
-					providedAddress: api.getPropertyAddress(property)
+					}
 				});
 			})
 			.catch(err => {

@@ -1,7 +1,6 @@
 import moment from 'moment';
 
-const appletonApiVersion = '3-0';
-const appletonApiBaseUrl = `http://${appletonApiVersion}.appletonapi.appspot.com`;
+const civicHackLocatorUrl = 'http://civic-hack-api-locator.azurewebsites.net/api/implementations/byaddress/';
 
 function status (response) {
 	if (response.status >= 200 && response.status < 300) {
@@ -39,33 +38,34 @@ export default function api (context) {
 			});
 		},
 
-		getProperties: (address) => {
-			let url = `${appletonApiBaseUrl}/search?q=${encodeURIComponent(address)}`;
-			return context.fetch(url)
+		getEndpoint: (address) => {
+			return context.fetch(civicHackLocatorUrl + encodeURIComponent(address))
 				.then(status)
 				.then(json)
 				.then(data => {
 					if (!data.length) {
-						return Promise.reject(new Error('No Appleton address found!'));
+						return Promise.reject('No API found! Address not supported.');
 					}
-					return Promise.resolve(data);
+					return data[0].implementationApiUrl;
 				});
 		},
 
-		getProperty: (id) => {
-			let url = `${appletonApiBaseUrl}/property/${id}`;
-			return context.fetch(url)
+		getRecyclePickup: (address, url) => {
+			return context.fetch(`${url}?addr=${encodeURIComponent(address)}`)
 				.then(status)
-				.then(json);
+				.then(json)
+				.then((pickups) => {
+					return pickups.filter((item) => item.collectionType === 'recycling').shift();
+				});
 		},
 
-		isRecyclingWeek: (property, currentDate) => {
-			let recycleDate = moment(property[1].recycleday, 'MM-DD-YYYY');
+		isRecyclingWeek: (pickup, currentDate) => {
+			let recycleDate = moment(pickup.collectionDate, 'YYYY-MM-DD');
 			return recycleDate.week() === moment(currentDate).week();
 		},
 
-		getNextGarbageDate: (property, currentDate) => {
-			let date = moment(currentDate).day(property[1].garbageday);
+		getNextGarbageDate: (pickup, currentDate) => {
+			let date = moment(currentDate).day(moment(pickup.collectionDate, 'YYYY-MM-DD').day());
 			if (date < moment(currentDate)) {
 				date.add(1, 'w');
 			}
@@ -74,10 +74,6 @@ export default function api (context) {
 
 		isDateInCurrentWeek: (date, currentDate) => {
 			return (moment(date).week() === moment(currentDate).week());
-		},
-
-		getPropertyAddress: (property) => {
-			return property[7].address;
 		}
 	};
 
