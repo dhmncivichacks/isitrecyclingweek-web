@@ -77,7 +77,7 @@ describe('api', () => {
 		it('should call civic hack locator api', () => {
 			fetchSpy.and.returnValue(Promise.resolve());
 			api.getEndpoint('address');
-			expect(fetchSpy).toHaveBeenCalledWith('http://civic-hack-api-locator.azurewebsites.net/api/implementations/byaddress/address');
+			expect(fetchSpy).toHaveBeenCalledWith('http://civic-hack-api-locator.azurewebsites.net/api/implementations?addr=address');
 		});
 		it('should resolve with results', () => {
 			let jsonSpy = jasmine.createSpy('json').and.returnValue(Promise.resolve([{ implementationApiUrl: 'url' }]));
