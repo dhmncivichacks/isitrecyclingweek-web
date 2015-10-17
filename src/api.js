@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const civicHackLocatorUrl = 'http://civic-hack-api-locator.azurewebsites.net/api/implementations/byaddress/';
+const civicHackLocatorUrl = 'http://civic-hack-api-locator.azurewebsites.net/api/implementations?addr=';
 
 function status (response) {
 	if (response.status >= 200 && response.status < 300) {
