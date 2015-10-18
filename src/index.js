@@ -1,7 +1,8 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line
+import ReactDOM from 'react-dom';
 import App from './components/app';
 import promise from 'es6-promise';
 
 promise.polyfill();
 
-React.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));

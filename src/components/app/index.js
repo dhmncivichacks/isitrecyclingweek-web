@@ -10,19 +10,12 @@ import About from '../about';
 import createApi from '../../api';
 import log from '../../log';
 
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-let themeManager = new ThemeManager();
-
 const api = createApi({
 	fetch: fetch.bind(window),
 	geolocation: navigator.geolocation
 });
 
 class App extends React.Component {
-	static childContextTypes = {
-		muiTheme: React.PropTypes.object
-	}
-
 	constructor (...args) {
 		super(...args);
 		this.state = {
@@ -69,11 +62,6 @@ class App extends React.Component {
 			.then(() => {
 				this.setState({ loading: false });
 			});
-	}
-	getChildContext() {
-		return {
-			muiTheme: themeManager.getCurrentTheme()
-		};
 	}
 	render () {
 		return (
