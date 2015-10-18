@@ -12,6 +12,14 @@
     margin-right: 0.5em;
 }
 
+._style__form {
+    padding-bottom: 1em;
+}
+
+._style__input {
+    margin-bottom: 1em;
+}
+
 ._style__searchIcon {
     margin-right: 6px;
     vertical-align: text-bottom;
