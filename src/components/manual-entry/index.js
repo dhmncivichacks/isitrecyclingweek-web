@@ -36,9 +36,9 @@ export default class ManualEntry extends React.Component {
 	}
 	render () {
 		return (
-			<form onSubmit={this.handleSubmit.bind(this)}>
+			<form onSubmit={this.handleSubmit.bind(this)} className={classes.form}>
 				<FontIcon className={ cx('fa', 'fa-search', classes.searchIcon) } />
-				<TextField hintText="Enter Address" onChange={this.handleInputChange.bind(this)} value={this.state.userInput} />
+				<TextField className={classes.input} floatingLabelText="Address" hintText="e.g. Street, City, State Zip" onChange={this.handleInputChange.bind(this)} value={this.state.userInput} />
 				<FlatButton primary={true} type="submit" disabled={this.state.loading} label="Search" className={classes.submitButton} />
 				<Location onFetchLocation={this.handleFetchLocation.bind(this)} />
 			</form>

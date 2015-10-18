@@ -1,3 +1,11 @@
+.form {
+    padding-bottom: 1em;
+}
+
+.input {
+    margin-bottom: 1em;
+}
+
 .searchIcon {
     margin-right: 6px;
     vertical-align: text-bottom;
