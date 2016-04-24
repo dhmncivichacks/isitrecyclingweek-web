@@ -42,7 +42,7 @@ describe('api', () => {
 		it('should fetch address from google using provided latitude and longitude', () => {
 			fetchSpy.and.returnValue(Promise.resolve());
 			callApi();
-			expect(fetchSpy).toHaveBeenCalledWith('http://maps.googleapis.com/maps/api/geocode/json?latlng=lat,lon&sensor=false');
+			expect(fetchSpy).toHaveBeenCalledWith('https://maps.googleapis.com/maps/api/geocode/json?latlng=lat,lon&sensor=false');
 		});
 		it('should resolve with results', () => {
 			let jsonSpy = jasmine.createSpy('json').and.returnValue(Promise.resolve({ results: 'test' }));
@@ -77,7 +77,7 @@ describe('api', () => {
 		it('should call civic hack locator api', () => {
 			fetchSpy.and.returnValue(Promise.resolve());
 			api.getEndpoint('address');
-			expect(fetchSpy).toHaveBeenCalledWith('http://civic-hack-api-locator.azurewebsites.net/api/implementations?addr=address');
+			expect(fetchSpy).toHaveBeenCalledWith('https://civic-hack-api-locator.azurewebsites.net/api/implementations?addr=address');
 		});
 		it('should resolve with results', () => {
 			let jsonSpy = jasmine.createSpy('json').and.returnValue(Promise.resolve([{ implementationApiUrl: 'url' }]));

@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const civicHackLocatorUrl = 'http://civic-hack-api-locator.azurewebsites.net/api/implementations?addr=';
+const civicHackLocatorUrl = 'https://civic-hack-api-locator.azurewebsites.net/api/implementations?addr=';
 
 function status (response) {
 	if (response.status >= 200 && response.status < 300) {
@@ -20,7 +20,7 @@ export default function api (context) {
 
 		reverseGeocode: (coordinates) => {
 			let {latitude, longitude} = coordinates;
-			let url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false`;
+			let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false`;
 			return context.fetch(url)
 				.then(status)
 				.then(json)
