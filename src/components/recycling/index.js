@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import cx from 'classnames';
-import Styles from 'material-ui/lib/styles';
-import FontIcon from 'material-ui/lib/font-icon';
+import { teal500, deepPurple500 } from 'material-ui/styles/colors';
+import FontIcon from 'material-ui/FontIcon';
 import classes from './style.css';
 
 export default class Recycling extends React.Component {
@@ -24,7 +24,7 @@ export default class Recycling extends React.Component {
 	render () {
 		let header = (
 			<span>
-				<FontIcon className={cx('fa', 'fa-recycle', classes.headerIcon)} style={{ color: Styles.Colors.teal500 }} />
+				<FontIcon className={cx('fa', 'fa-recycle', classes.headerIcon)} style={{ color: teal500 }} />
 				Is it Recycling
 			</span>
 		);
@@ -33,8 +33,8 @@ export default class Recycling extends React.Component {
 			return <div>{header}?</div>;
 		}
 		let weekLabel = (garbageDay.isThisWeek) ? 'this week' : 'next week';
-		let yes = this.renderAnswer('Yes! Take out the recycling!', Styles.Colors.teal500, 'fa-check');
-		let no = this.renderAnswer('No, you can relax :)', Styles.Colors.deepPurple500);
+		let yes = this.renderAnswer('Yes! Take out the recycling!', teal500, 'fa-check');
+		let no = this.renderAnswer('No, you can relax :)', deepPurple500);
 		return (
 			<div>
 				<p>{header} <strong>{ garbageDay.label } { weekLabel }</strong>?</p>

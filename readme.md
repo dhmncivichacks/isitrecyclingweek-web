@@ -10,18 +10,16 @@ Development
 ```
 git clone https://github.com/dhmncivichacks/isitrecycling.git
 npm install
-npm run dev
+npm start
 ```
 
 Usage
 -----
 
-`npm run dev` to start a dev server that will watch for changes.
+`npm start` to start a dev server that will watch for changes.
 
 `npm run build` to build production quality js.
 
 `npm test` to execute linter and tests.
 
-`npm run watch:test` to execute tests on change.
-
-`npm run publish:pages --silent` to publish latest changes to gh-pages.
+`npm run deploy` to publish latest changes to gh-pages.

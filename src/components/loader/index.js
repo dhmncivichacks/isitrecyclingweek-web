@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import LinearProgress from 'material-ui/lib/linear-progress';
+import LinearProgress from 'material-ui/LinearProgress';
 import classes from './style.css';
 
 export default class Loader extends React.Component {

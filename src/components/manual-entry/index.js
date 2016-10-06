@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import cx from 'classnames';
-import FlatButton from 'material-ui/lib/flat-button';
-import TextField from 'material-ui/lib/text-field';
-import FontIcon from 'material-ui/lib/font-icon';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import FontIcon from 'material-ui/FontIcon';
 import Location from '../location';
 import classes from './style.css';
 
@@ -14,7 +14,7 @@ export default class ManualEntry extends React.Component {
 	constructor (...args) {
 		super(...args);
 		this.state = {
-			userInput: null,
+			userInput: '',
 			loading: null
 		};
 	}

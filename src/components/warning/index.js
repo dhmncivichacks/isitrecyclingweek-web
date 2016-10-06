@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Styles from 'material-ui/lib/styles';
+import { red600 } from 'material-ui/styles/colors';
 
 export default class Warning extends React.Component {
 	static propTypes = {
@@ -7,7 +7,7 @@ export default class Warning extends React.Component {
 	}
 	render() {
 		return (
-			<p style={{ color: Styles.Colors.red600 }}>
+			<p style={{ color: red600 }}>
 				<strong>{ this.props.error }</strong>
 			</p>
 		);

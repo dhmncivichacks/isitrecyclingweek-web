@@ -1,5 +1,5 @@
 /*eslint-env jasmine */
-import createApi from '../src/api';
+import createApi from '../api';
 
 describe('api', () => {
 

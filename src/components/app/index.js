@@ -9,6 +9,7 @@ import Section from '../section';
 import About from '../about';
 import createApi from '../../api';
 import log from '../../log';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const api = createApi({
 	fetch: fetch.bind(window),
@@ -19,7 +20,7 @@ class App extends React.Component {
 	constructor (...args) {
 		super(...args);
 		this.state = {
-			providedAddress: null,
+			providedAddress: '',
 			loading: false,
 			error: null,
 			recycling: {}
@@ -65,19 +66,21 @@ class App extends React.Component {
 	}
 	render () {
 		return (
-			<div>
-				<Loader loading={this.state.loading} />
-				<Section>
-					<Header>
-						<Recycling {...this.state.recycling} />
-						<Warning error={this.state.error} />
-					</Header>
-					<Panel>
-						<ManualEntry onLookup={this.handleAddressLookup.bind(this)} onFetchLocation={this.handleFetchLocation.bind(this)} />
-					</Panel>
-				</Section>
-				<About />
-			</div>
+			<MuiThemeProvider>
+				<div>
+					<Loader loading={this.state.loading} />
+					<Section>
+						<Header>
+							<Recycling {...this.state.recycling} />
+							<Warning error={this.state.error} />
+						</Header>
+						<Panel>
+							<ManualEntry onLookup={this.handleAddressLookup.bind(this)} onFetchLocation={this.handleFetchLocation.bind(this)} />
+						</Panel>
+					</Section>
+					<About />
+				</div>
+			</MuiThemeProvider>
 		);
 	}
 }
