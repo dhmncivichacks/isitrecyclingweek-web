@@ -34,11 +34,17 @@ export default class ManualEntry extends React.Component {
 			return this.handleSubmit();
 		});
 	}
+	handleKeyPress (event) {
+		if(event.keyCode === 13){
+			this.handleSubmit(event);
+		}
+	}
 	render () {
 		return (
 			<form onSubmit={this.handleSubmit.bind(this)} className={classes.form}>
 				<FontIcon className={ cx('fa', 'fa-search', classes.searchIcon) } />
-				<TextField className={classes.input} floatingLabelText="Address" hintText="e.g. Street, City, State Zip" onChange={this.handleInputChange.bind(this)} value={this.state.userInput} />
+				<TextField className={classes.input} floatingLabelText="Address" hintText="e.g. Street, City, State Zip" onChange={this.handleInputChange.bind(this)}
+				           onKeyPress={this.handleKeyPress.bind(this)} value={this.state.userInput} required />
 				<FlatButton primary={true} type="submit" disabled={this.state.loading} label="Search" className={classes.submitButton} />
 				<Location onFetchLocation={this.handleFetchLocation.bind(this)} />
 			</form>
