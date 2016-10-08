@@ -7,7 +7,8 @@ function status (response) {
 		return Promise.resolve(response);
 	}
 	else {
-		return Promise.reject(new Error(response.statusText));
+		console.error(response.statusText);
+		return Promise.reject(new Error("We experienced an issue with your address, try again?"));
 	}
 }
 
@@ -44,7 +45,7 @@ export default function api (context) {
 				.then(json)
 				.then(data => {
 					if (!data.length) {
-						return Promise.reject(new Error('No API found! Address not supported.'));
+						return Promise.reject(new Error(`${address} was not found in our supported areas, try again?`));
 					}
 					return data[0].implementationApiUrl;
 				});
