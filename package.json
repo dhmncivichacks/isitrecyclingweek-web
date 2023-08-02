@@ -13,17 +13,30 @@
   "author": "Chris Jaure",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.3",
     "classnames": "^2.1.2",
     "es6-promise": "^2.2.0",
-    "material-ui": "^0.16",
     "moment": "^2.10.3",
-    "react": "^15",
-    "react-dom": "^15",
-    "react-tap-event-plugin": "^1.0.0"
+    "prop-types": "^15.8.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
-    "custom-react-scripts": "0.0.15",
     "gh-pages": "^0.3.0"
   },
-  "homepage": "https://dhmncivichacks.github.io/isitrecyclingweek-web"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

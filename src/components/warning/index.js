@@ -1,8 +1,9 @@
-import React, {PropTypes} from 'react';
-import { red600 } from 'material-ui/styles/colors';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { red } from '@mui/material/colors';
 
 const Warning = (props) => (
-	<p style={{ color: red600 }}>
+	<p style={{ color: red }}>
 		<strong>{ props.error }</strong>
 	</p>
 );

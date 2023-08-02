@@ -9,7 +9,7 @@ import Section from '../section';
 import About from '../about';
 import createApi from '../../api';
 import log from '../../log';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { ThemeProvider } from '@mui/material/styles';   //FIXME
 
 const api = createApi({
 	fetch: fetch.bind(window),
@@ -66,7 +66,7 @@ class App extends React.Component {
 	}
 	render () {
 		return (
-			<MuiThemeProvider>
+			<ThemeProvider>
 				<div>
 					<Loader loading={this.state.loading} />
 					<Section>
@@ -80,7 +80,7 @@ class App extends React.Component {
 					</Section>
 					<About />
 				</div>
-			</MuiThemeProvider>
+			</ThemeProvider>
 		);
 	}
 }

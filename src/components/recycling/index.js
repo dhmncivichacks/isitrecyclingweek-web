@@ -1,7 +1,8 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { teal500, deepPurple500 } from 'material-ui/styles/colors';
-import FontIcon from 'material-ui/FontIcon';
+import { teal, deepPurple } from '@mui/material/colors';
+import Icon from '@mui/material/Icon';
 import classes from './style.css';
 
 export default class Recycling extends React.Component {
@@ -16,7 +17,7 @@ export default class Recycling extends React.Component {
 		return (
 			<span style={{ color }}>
 				{ icon ?
-					<FontIcon className={cx('fa', icon, classes.answerIcon)} /> : null }
+					<Icon className={cx('fa', icon, classes.answerIcon)} /> : null }
 				{text}
 			</span>
 		);
@@ -24,7 +25,7 @@ export default class Recycling extends React.Component {
 	render () {
 		let header = (
 			<span>
-				<FontIcon className={cx('fa', 'fa-recycle', classes.headerIcon)} style={{ color: teal500 }} />
+				<Icon className={cx('fa', 'fa-recycle', classes.headerIcon)} style={{ color: teal }} />
 				Is it Recycling
 			</span>
 		);
@@ -33,8 +34,8 @@ export default class Recycling extends React.Component {
 			return <div>{header}?</div>;
 		}
 		let weekLabel = (garbageDay.isThisWeek) ? 'this week' : 'next week';
-		let yes = this.renderAnswer('Yes! Take out the recycling!', teal500, 'fa-check');
-		let no = this.renderAnswer('No, you can relax :)', deepPurple500);
+		let yes = this.renderAnswer('Yes! Take out the recycling!', teal, 'fa-check');
+		let no = this.renderAnswer('No, you can relax :)', deepPurple);
 		return (
 			<div>
 				<p>{header} <strong>{ garbageDay.label } { weekLabel }</strong>?</p>

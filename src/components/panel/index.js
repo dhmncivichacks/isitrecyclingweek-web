@@ -1,5 +1,5 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
+import Paper from '@mui/material/Paper';
 import classes from './style.css';
 
 export default (props) => (

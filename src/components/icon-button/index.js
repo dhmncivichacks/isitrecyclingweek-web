@@ -1,15 +1,16 @@
-import React, {PropTypes} from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import Icon from '@mui/material/Icon';
 import cx from 'classnames';
 import classes from './style.css';
 
 const IconButton = (props) => {
 	let {icon, className, ...other} = props;
 	return (
-		<FlatButton {...other} className={ cx(className, classes.button) }>
-			<FontIcon className={cx('fa', icon, classes.icon)} />
-		</FlatButton>
+		<Button {...other} className={ cx(className, classes.button) }>
+			<Icon className={cx('fa', icon, classes.icon)} />
+		</Button>
 	);
 };
 

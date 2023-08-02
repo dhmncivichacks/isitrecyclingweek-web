@@ -1,5 +1,6 @@
-import React, {PropTypes} from 'react';
-import LinearProgress from 'material-ui/LinearProgress';
+import React from 'react';
+import PropTypes from 'prop-types';
+import LinearProgress from '@mui/material/LinearProgress';
 import classes from './style.css';
 
 const Loader = (props) => (

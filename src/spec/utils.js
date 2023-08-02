@@ -1,5 +1,5 @@
 import React from 'react';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import getMuiTheme from '@mui/material/styles/getMuiTheme';
 
 export default {
 	createElement: function(element, props) {
